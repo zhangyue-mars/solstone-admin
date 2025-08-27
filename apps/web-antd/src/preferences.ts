@@ -1,5 +1,5 @@
 import { defineOverridesPreferences } from '@vben/preferences';
-
+import logoImage from '/logo-solstone.svg';
 /**
  * @description 项目配置文件
  * 只需要覆盖项目中的一部分配置，不需要的配置不用覆盖，会自动使用默认配置
@@ -27,6 +27,14 @@ export const overridesPreferences = defineOverridesPreferences({
      * 2. 切换租户登录后不会重新加载菜单
      */
     // loginExpiredMode: 'modal',
+  },
+  logo: {
+    source: logoImage,
+  },
+  copyright: {
+    date: '2025',
+    companyName: '煤炭科学研究总院-矿山人工智能研究院',
+    companySiteLink:'https://cics.ccteg.cn/',
   },
   footer: {
     /**
