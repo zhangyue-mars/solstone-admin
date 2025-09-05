@@ -4,7 +4,8 @@ import type { VxeGridProps } from '#/adapter/vxe-table';
 import { DictEnum } from '@vben/constants';
 
 import { renderDict } from '#/utils/render';
-
+import { Tag } from 'ant-design-vue'; // 导入 Tag 组件
+import { h } from 'vue';
 export const querySchema: FormSchemaGetter = () => [
   {
     component: 'Input',
@@ -45,6 +46,16 @@ export const columns: VxeGridProps['columns'] = [
     field: 'modelPrice',
   },
   {
+    title: '模型优先级',
+    field: 'priority',
+    width: 120,
+    slots: {
+      default: ({ row }) => {
+        return row.priority || 1;
+      },
+    },
+  },
+  {
     title: '计费类型',
     field: 'modelType',
     width: 120,
@@ -61,6 +72,23 @@ export const columns: VxeGridProps['columns'] = [
     slots: {
       default: ({ row }) => {
         return renderDict(row.modelShow, DictEnum.SYS_SHOW_HIDE);
+      },
+    },
+  },
+  {
+    title: '深度思考',
+    field: 'isDeepThinking',
+    slots: {
+      default: ({ row }) => {
+        console.log('row.isDeepThinking', row.isDeepThinking);
+        const isShow = row.isDeepThinking === 1;
+        return h(
+          Tag,
+          {
+            color: isShow ? 'green' : 'red',
+          },
+          isShow ? '能' : '否',
+        );
       },
     },
   },

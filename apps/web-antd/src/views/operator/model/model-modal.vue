@@ -13,7 +13,7 @@ import { useVbenModal } from '@vben/common-ui';
 import { $t } from '@vben/locales';
 import { cloneDeep, getPopupContainer } from '@vben/utils';
 
-import { Form, FormItem, Input, Select, Textarea } from 'ant-design-vue';
+import { Form, FormItem, Input, InputNumber, Select, Textarea } from 'ant-design-vue';
 import { pick } from 'lodash-es';
 
 import { modelAdd, modelInfo, modelUpdate } from '#/api/operator/model';
@@ -30,10 +30,12 @@ const title = computed(() => {
  */
 const defaultValues: Partial<ModelForm> = {
   id: undefined,
+  isDeepThinking: undefined,
   category: undefined,
   modelName: undefined,
   modelDescribe: undefined,
   modelPrice: undefined,
+  priority: 1,
   modelType: undefined,
   modelShow: undefined,
   systemPrompt: undefined,
@@ -41,7 +43,6 @@ const defaultValues: Partial<ModelForm> = {
   apiKey: undefined,
   remark: undefined,
 };
-
 /**
  * 表单数据ref
  */
@@ -60,6 +61,7 @@ const formRules = ref<AntdFormRules<ModelForm>>({
   modelPrice: [{ required: true, message: '模型价格不能为空' }],
   modelType: [{ required: true, message: '计费类型不能为空' }],
   modelShow: [{ required: true, message: '是否显示不能为空' }],
+  isDeepThinking: [{ required: true, message: '深度思考不能为空' }],
   apiHost: [{ required: true, message: '请求地址不能为空' }],
   apiKey: [{ required: true, message: '密钥不能为空' }],
 });
@@ -125,6 +127,11 @@ const getmodelShow = ref([
   { label: '显示', value: '0' },
 ]);
 
+const getDeepThinkingShow = ref([
+  { label: '隐藏', value: 0 },
+  { label: '显示', value: 1 },
+]);
+
 const getmodelType = ref([
   { label: 'token计费', value: '1' },
   { label: '次数计费', value: '2' },
@@ -142,7 +149,6 @@ const getModelCategory = ref([
   { label: '图片识别模型-image', value: 'image' },
   { label: 'FASTGPT-fastgpt', value: 'fastgpt' },
 ]);
-
 </script>
 
 <template>
@@ -174,6 +180,15 @@ const getModelCategory = ref([
           :placeholder="$t('ui.formRules.required')"
         />
       </FormItem>
+      <FormItem label="模型优先级" v-bind="validateInfos.priority">
+        <InputNumber
+          v-model:value="formData.priority"
+          :min="1"
+          :precision="0"
+          placeholder="数字越大优先级越高，默认为1"
+          style="width: 100%"
+        />
+      </FormItem>
       <FormItem label="计费类型" v-bind="validateInfos.modelType">
         <Select
           v-model:value="formData.modelType"
@@ -187,6 +202,15 @@ const getModelCategory = ref([
         <Select
           v-model:value="formData.modelShow"
           :options="getmodelShow"
+          :get-popup-container="getPopupContainer"
+          :placeholder="$t('ui.formRules.selectRequired')"
+        />
+      </FormItem>
+
+      <FormItem label="深度思考" v-bind="validateInfos.isDeepThinking">
+        <Select
+          v-model:value="formData.isDeepThinking"
+          :options="getDeepThinkingShow"
           :get-popup-container="getPopupContainer"
           :placeholder="$t('ui.formRules.selectRequired')"
         />

@@ -1,6 +1,8 @@
 export enum DictEnum {
+  CHAT_MODEL_CATEGORY = 'chat_model_category', // 模型分类
   PAY_STATE = 'pay_state', // 支付状态
   PROMPT_TEMPLATE_TYPE = 'prompt_template_type', // 任务状态
+  STATUS_TYPE = 'status_type', // 状态类型
   SYS_COMMON_STATUS = 'sys_common_status',
   SYS_DEVICE_TYPE = 'sys_device_type', // 设备类型
   SYS_GRANT_TYPE = 'sys_grant_type', // 授权类型
@@ -16,6 +18,4 @@ export enum DictEnum {
   WF_BUSINESS_STATUS = 'wf_business_status', // 业务状态
   WF_FORM_TYPE = 'wf_form_type', // 表单类型
   WF_TASK_STATUS = 'wf_task_status', // 任务状态
-  CHAT_MODEL_CATEGORY = 'chat_model_category', // 模型分类
-  STATUS_TYPE = 'status_type', // 状态类型
 }
