@@ -62,10 +62,10 @@ async function handleOk() {
     <Form
       ref="formRef"
       :model="formState"
-      :rules="{ amount: [{ required: true, message: '请输入金额' }] }"
+      :rules="{ amount: [{ required: true, message: '请输入Tokens数量' }] }"
       layout="vertical"
     >
-      <Form.Item label="金额" name="amount">
+      <Form.Item label="Tokens数量（单位：百万）" name="amount">
         <InputNumber
           v-model:value="formState.amount"
           :min="1"
