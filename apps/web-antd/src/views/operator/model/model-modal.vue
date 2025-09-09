@@ -128,8 +128,8 @@ const getmodelShow = ref([
 ]);
 
 const getDeepThinkingShow = ref([
-  { label: '隐藏', value: 0 },
-  { label: '显示', value: 1 },
+  { label: '否', value: 0 },
+  { label: '能', value: 1 },
 ]);
 
 const getmodelType = ref([
@@ -138,6 +138,7 @@ const getmodelType = ref([
 ]);
 
 const getModelCategory = ref([
+  { label: '太阳石矿山大模型-solstone', value: 'solstone' },
   { label: '本地部署模型-ollama', value: 'ollama' },
   { label: '中转模型-chat', value: 'chat' },
   { label: 'DIFY-dify', value: 'dify' },
