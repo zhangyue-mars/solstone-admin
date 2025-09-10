@@ -42,13 +42,18 @@ export const querySchema: FormSchemaGetter = () => [
   },
 ];
 
-
 export const columns: VxeGridProps['columns'] = [
   { type: 'checkbox', width: 60 },
   { title: '兑换码', field: 'code', width: 180 },
   { title: '卡号', field: 'cardNo' },
-  { title: '金额', field: 'amount' },
-
+  {
+    title: 'Tokens数量（百万）',
+    field: 'amount',
+    formatter: ({ cellValue }) => {
+      if (cellValue === null) return '';
+      return Number(cellValue).toFixed(6);
+    },
+  },
   {
     title: '是否兑换',
     field: 'isRedeemed',
@@ -61,7 +66,6 @@ export const columns: VxeGridProps['columns'] = [
       },
     },
   },
-
   { title: '兑换用户ID', field: 'redeemedUserId', width: 180 },
   { title: '兑换时间', field: 'redeemedTime' },
   { title: '创建时间', field: 'createTime' },
