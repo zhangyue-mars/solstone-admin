@@ -42,6 +42,7 @@ const defaultValues: Partial<ModelForm> = {
   apiHost: undefined,
   apiKey: undefined,
   remark: undefined,
+  useSystemPrompt: undefined,
 };
 /**
  * 表单数据ref
@@ -62,6 +63,7 @@ const formRules = ref<AntdFormRules<ModelForm>>({
   modelType: [{ required: true, message: '计费类型不能为空' }],
   modelShow: [{ required: true, message: '是否显示不能为空' }],
   isDeepThinking: [{ required: true, message: '深度思考不能为空' }],
+  useSystemPrompt: [{ required: true, message: '使用系统提示词不能为空' }],
   apiHost: [{ required: true, message: '请求地址不能为空' }],
   apiKey: [{ required: true, message: '密钥不能为空' }],
 });
@@ -132,6 +134,11 @@ const getDeepThinkingShow = ref([
   { label: '能', value: 1 },
 ]);
 
+const getUseSystemPrompt = ref([
+  { label: '否', value: 0 },
+  { label: '是', value: 1 },
+]);
+
 const getmodelType = ref([
   { label: 'token计费', value: '1' },
   { label: '次数计费', value: '2' },
@@ -149,6 +156,7 @@ const getModelCategory = ref([
   { label: '知识库向量模型-vector', value: 'vector' },
   { label: '图片识别模型-image', value: 'image' },
   { label: 'FASTGPT-fastgpt', value: 'fastgpt' },
+  { label: 'SUNO-suno', value: 'suno' },
 ]);
 </script>
 
@@ -212,6 +220,15 @@ const getModelCategory = ref([
         <Select
           v-model:value="formData.isDeepThinking"
           :options="getDeepThinkingShow"
+          :get-popup-container="getPopupContainer"
+          :placeholder="$t('ui.formRules.selectRequired')"
+        />
+      </FormItem>
+
+      <FormItem label="系统提示词" v-bind="validateInfos.useSystemPrompt">
+        <Select
+          v-model:value="formData.useSystemPrompt"
+          :options="getUseSystemPrompt"
           :get-popup-container="getPopupContainer"
           :placeholder="$t('ui.formRules.selectRequired')"
         />

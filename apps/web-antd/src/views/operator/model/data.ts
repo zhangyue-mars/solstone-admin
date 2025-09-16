@@ -3,9 +3,11 @@ import type { VxeGridProps } from '#/adapter/vxe-table';
 
 import { DictEnum } from '@vben/constants';
 
-import { renderDict } from '#/utils/render';
-import { Tag } from 'ant-design-vue'; // 导入 Tag 组件
 import { h } from 'vue';
+import { Tag } from 'ant-design-vue';
+
+import { renderDict } from '#/utils/render';
+
 export const querySchema: FormSchemaGetter = () => [
   {
     component: 'Input',
@@ -88,6 +90,22 @@ export const columns: VxeGridProps['columns'] = [
             color: isShow ? 'green' : 'red',
           },
           isShow ? '能' : '否',
+        );
+      },
+    },
+  },
+  {
+    title: '系统提示词',
+    field: 'useSystemPrompt',
+    slots: {
+      default: ({ row }) => {
+        const isShow = row.useSystemPrompt === 1;
+        return h(
+          Tag,
+          {
+            color: isShow ? 'green' : 'red',
+          },
+          isShow ? '是' : '否',
         );
       },
     },
